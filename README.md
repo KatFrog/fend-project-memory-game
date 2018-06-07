@@ -7,14 +7,10 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This is an online version of the old card game Concentration.  You play by turning over cards, one at a time, and looking to match the symbols on the other side.  When you match cards, the background color changes and they stay turned over.  Otherwise, both cards turn face down and you can choose again.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+The game ends when you find all of the matching pairs.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+At the moment, I am the only person allowed to contribute to this project, as it is an assignment for earning a Front-End Nanodegree from Udacity.  But feel free to request changes or improvements through the issues interface.
