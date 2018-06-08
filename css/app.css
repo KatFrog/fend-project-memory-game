@@ -121,3 +121,23 @@ h1 {
     font-family: tahoma;
     padding: 0 0 0 15px;
 }
+
+.winnerMessage {
+    border: medium solid green;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px green;
+    font-family: Georgia, serif, sans-serif;
+    font-size: 24px;
+}
+
+.winButtons {
+    width: auto;
+}
+
+.nextGame {
+    margin: 0 10px 0 10px;
+}
+
+.cancel {
+    margin: 0 10px 0 10px;
+}
