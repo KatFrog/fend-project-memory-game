@@ -25,46 +25,67 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 function playGame() {
+	// variables used to tell when the game is over
 	const maxPairs = 8;
 	let unmatchedPairs = maxPairs;
-	let exit = false;
+
+	// Boolean used to tell if two cards match
 	let matched = false;
+
+	// used to implement the move counter
 	let moveCounter = 0;
+	const moves = $('#moves');
+
+	// Used to keep track of the clicked cards
 	let currentCard;
-	let starCount = 3;
+	const currentCards = [];
+
+	// Tells the system that it's waiting for the timeout to run
 	let inTimeout = false;
-	let clearTime;
+
+	// Variables used to implement a timer
 	let seconds = 0;
 	let minutes = 0;
 	let secs = "";
 	let mins = "";
 	let time = "";
 	let timer;
+
+	// variables used to implement the star rating system
+	const maxStars = 3;
+	let starCount = maxStars;
 	let nextStar;
+	const stars = $('#stars');
+
+	// Used to implement the winning modal
 	const closeModal = document.getElementById('cancel');
 	const nextGame = document.getElementById('newGame');
 	const winDialog = document.getElementById('winner');
-	const maxStars = 3;
-	const stars = $('#stars');
-	const deck = $('#deck');
-	const moves = $('#moves');
-	const restart = $('#restart');
-	const currentCards = [];
 
-	const chessCards = ['fas fa-chess', 'fas fa-chess-bishop',
-		'fas fa-chess-board', 'fas fa-chess-king',
-		'fas fa-chess-knight', 'fas fa-chess-pawn', 'fas fa-chess-queen',
-		'fas fa-chess-rook'
-	];
-	const geekCards = ['fab fa-android', 'fab fa-gitkraken', 'fab fa-linux',
-		'fab fa-mandalorian', 'fab fa-nintendo-switch', 'fab fa-phoenix-squadron',
-		'fab fa-python', 'fab fa-reddit-alien', 'fab fa-steam',
-		'fab fa-wolf-pack-battalion'
-	];
-	const starWarsCards = ['fab fa-empire', 'fab fa-galactic-republic',
-		'fab fa-galactic-senate', 'fab fa-jedi-order', 'fab fa-old-republic',
-		'fab fa-rebel', 'fab fa-sith', 'fab fa-trade-federation'
-	];
+	// Selects the deck for the event listener
+	const deck = $('#deck');
+
+	// Selects the restart area, when a player wants to start a new game.
+	const restart = $('#restart');
+
+	/*  Extra card sets to be used in the next version of the game.
+
+		const chessCards = ['fas fa-chess', 'fas fa-chess-bishop',
+			'fas fa-chess-board', 'fas fa-chess-king',
+			'fas fa-chess-knight', 'fas fa-chess-pawn', 'fas fa-chess-queen',
+			'fas fa-chess-rook'
+		];
+		const geekCards = ['fab fa-android', 'fab fa-gitkraken', 'fab fa-linux',
+			'fab fa-mandalorian', 'fab fa-nintendo-switch', 'fab fa-phoenix-squadron',
+			'fab fa-python', 'fab fa-reddit-alien', 'fab fa-steam',
+			'fab fa-wolf-pack-battalion'
+		];
+		const starWarsCards = ['fab fa-empire', 'fab fa-galactic-republic',
+			'fab fa-galactic-senate', 'fab fa-jedi-order', 'fab fa-old-republic',
+			'fab fa-rebel', 'fab fa-sith', 'fab fa-trade-federation'
+		];
+		*/
+
 	const possibleCards = ['fas fa-allergies', 'fas fa-ambulance',
 		'fab fa-angellist', 'fas fa-at', 'fas fa-balance-scale', 'fas fa-bath',
 		'fas fa-bell', 'fas fa-bicycle', 'fas fa-binoculars', 'fas fa-birthday-cake',
@@ -76,7 +97,7 @@ function playGame() {
 		'fas fa-dove', 'fab fa-earlybirds', 'fas fa-eject', 'fas fa-eraser',
 		'fas fa-eye-dropper', 'fas fa-feather', 'fas fa-fighter-jet', 'fas fa-film',
 		'fas fa-fire-extinguisher', 'fas fa-first-aid', 'fas fa-flask', 'fas fa-fly',
-		'fas fa-font-awesome', 'fas fa-frog', 'fas fa-gas-pump', 'fas fa-gift',
+		'fab fa-font-awesome', 'fas fa-frog', 'fas fa-gas-pump', 'fas fa-gift',
 		'fab fa-grav', 'fab fa-grunt', 'fas fa-heart', 'fas fa-heartbeat',
 		'fas fa-helicopter', 'fas fa-home', 'fas fa-kiwi-bird', 'fas fa-leaf',
 		'fas fa-lemon', 'fas fa-lightbulb', 'fas fa-magic', 'fas fa-meh',
@@ -194,8 +215,8 @@ function playGame() {
 		minutes = 0;
 		secs = '0' + seconds;
 		mins = '0' + minutes + ': ';
-		/* clear the stop watch using the setTimeout( )
-		   return value 'clearTime' as ID */
+		/* clear the stop watch using the setInterval( )
+		   return value 'timer' as ID */
 		clearInterval(timer);
 		return time;
 	}
@@ -245,7 +266,7 @@ function playGame() {
 		for (let i = starCount; i < maxStars; i++) {
 			stars.append('<li><i class="fa fa-star"></i></li>');
 		}
-		return starCount;
+		starCount = maxStars;
 	}
 
 	function clearDeck() {
@@ -254,7 +275,6 @@ function playGame() {
 
 	function gameWon() {
 		winningTime = stopTimer();
-		winningStars = resetStars();
 		$('#winnerMessage').empty();
 		$('#winnerMessage').append(
 			`You won the game!  You did it with:
@@ -262,10 +282,9 @@ function playGame() {
 			<li>a time of ${winningTime}</li>
 			<li> ${moveCounter} moves</li>
 			</ul>
-			<p>You earned ${winningStars} stars.</p>`
+			<p>You earned ${starCount} stars.</p>`
 		)
 		winDialog.showModal();
-		starCount = maxStars;
 		unmatchedPairs = maxPairs;
 
 	}
@@ -303,7 +322,7 @@ function playGame() {
 		timer = setInterval(function() {
 			runTimer();
 		}, 1000);
-		if (starCount < 3) {
+		if (starCount < maxStars) {
 			resetStars();
 		}
 	}
