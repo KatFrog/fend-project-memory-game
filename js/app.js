@@ -217,9 +217,6 @@ function playGame() {
 		}
 	}
 
-	function donothing() {
-		console.log("Waiting for the user to see the cards.");
-	}
 
 	// Show the clicked cards
 	function showCard(currentCard) {
@@ -260,7 +257,12 @@ function playGame() {
 		winningStars = resetStars();
 		$('#winnerMessage').empty();
 		$('#winnerMessage').append(
-			`You won the game in ${winningTime} using ${moveCounter} moves.  You earned ${winningStars} stars.`
+			`You won the game!  You did it with:
+			<ul>
+			<li>a time of ${winningTime}</li>
+			<li> ${moveCounter} moves</li>
+			</ul>
+			<p>You earned ${winningStars} stars.</p>`
 		)
 		winDialog.showModal();
 		starCount = maxStars;
