@@ -8,7 +8,7 @@
 
 ## Description
 
-This is the first project that combines JavaScript, HTML, and CSS for the Front-End Nanodegree.  Udacity provided [starter code] (https://github.com/udacity/fend-project-memory-game) which provided a static project. The students were then tasked with making it an interactive game.  
+This is the first project that combines JavaScript, HTML, and CSS for the Front-End Web Development Nanodegree.  Udacity provided [starter code] (https://github.com/udacity/fend-project-memory-game) which provided a static project. The students were then tasked with making it an interactive game.  
 
 ## Instructions
 
